@@ -1,0 +1,55 @@
+<h1 id="tableLabel">User List</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!users"><em>Loading...</em></p>
+
+<!-- Button to trigger the modal -->
+<button type="button" class="btn btn-success float-end" (click)="openAddUserModal()">
+  Add User
+</button>
+<table class="table table-striped" aria-labelledby="tableLabel" *ngIf="users">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.fullName }}</td>
+      <td>{{ user.age }}</td>
+      <td>{{ user.email }}</td>
+      <td> <button class="btn btn-warning btn-sm me-2" (click)="openEditUserModal(user)">
+        <i class="fa fa-edit"></i>
+      </button>
+      <button class="btn btn-danger btn-sm" (click)="deleteUser(user.id??'')">
+        <i class="fa fa-trash-alt"></i>
+      </button></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <app-user-modal [user]="selectedUser" [isEdit]="isEditing" (userSaved)="getAllUsers()" ></app-user-modal>
+
+

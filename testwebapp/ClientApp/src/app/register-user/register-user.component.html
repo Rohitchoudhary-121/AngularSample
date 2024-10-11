@@ -1,0 +1,50 @@
+<div class="form-container">
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="form">
+        <p class="title">Register</p>
+        <p class="message">Signup now and get full access to our app.</p>
+
+        <!-- <div class="flex"> -->
+            <label>
+                <input formControlName="fullName" placeholder="" type="text" class="input" required>
+                <span>FullName</span>
+            </label>
+            <div class="text-danger" *ngIf="registrationForm.get('fullName')?.touched && registrationForm.get('fullName')?.invalid">
+                <small *ngIf="registrationForm.get('fullName')?.errors?.['required']">FullName is required.</small>
+                <small *ngIf="registrationForm.get('fullName')?.errors?.['pattern']">Only letters are allowed.</small>
+            </div>
+        <!-- </div> -->
+
+        <label>
+            <input formControlName="email" placeholder="" type="email" class="input" required>
+            <span>Email</span>
+        </label>
+        <div class="text-danger" *ngIf="registrationForm.get('email')?.touched && registrationForm.get('email')?.invalid">
+            <small *ngIf="registrationForm.get('email')?.errors?.['required']">Email is required.</small>
+            <small *ngIf="registrationForm.get('email')?.errors?.['email']">Invalid email format.</small>
+        </div>
+
+        <label>
+            <input formControlName="password" placeholder="" type="password" class="input" required>
+            <span>Password</span>
+        </label>
+        <div class="text-danger" *ngIf="registrationForm.get('password')?.touched && registrationForm.get('password')?.invalid">
+            <small *ngIf="registrationForm.get('password')?.errors?.['required']">Password is required.</small>
+            <small *ngIf="registrationForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters.</small>
+            <small *ngIf="registrationForm.get('password')?.errors?.['pattern']">Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.</small>
+        </div>
+
+        <label>
+            <input formControlName="confirmPassword" placeholder="" type="password" class="input" required>
+            <span>Confirm password</span>
+        </label>
+        <div class="text-danger" *ngIf="registrationForm.get('confirmPassword')?.touched">
+            <small *ngIf="registrationForm.get('confirmPassword')?.errors?.['required']">Confirmation is required.</small>
+            <small *ngIf="registrationForm.errors?.['mismatch']">Passwords do not match.</small>
+        </div>
+
+      
+
+        <button type="submit" class="submit">Submit</button>
+        <p class="signin">Already have an account? <a href="/login">Signin</a></p>
+    </form>
+</div>
